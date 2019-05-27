@@ -1,0 +1,66 @@
+root: true
+env:
+  browser: true
+  node: true
+  es6: true
+parser: "@typescript-eslint/parser"
+parserOptions:
+  # When Using TypeScript, Setting of Root Dir. ( To Find for tsconfig.json )
+  tsconfigRootDir: "."
+  # When Using TypeScript, Import tsconfig Setting.
+  project: "./tsconfig.json"
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+plugins:
+  - "@typescript-eslint"
+  - prettier
+  - import
+settings:
+  # Import webpack Alias Setting, Linting for 'import/no-unresolved'.
+  # If Using JavaScript FrameWork or Library. -> webpack/webpack.base.babel.js
+  # If Create Static Website. -> webpack/webpack.gulp.babel.js
+  "import/resolver":
+    webpack:
+      config: "webpack/webpack.gulp.babel.js"
+  node:
+    tryExtensions:
+      - ".js"
+      - ".ts"
+      - ".json"
+      - ".node"
+#
+#
+# Set Linting Rules Below.
+extends:
+  - "standard"
+  - "plugin:@typescript-eslint/recommended"
+  - "plugin:prettier/recommended"
+rules:
+  "prettier/prettier":
+    - error
+    - tabWidth: 2
+      trailingComma: none
+      singleQuote: true
+      semi: false
+      printWidth: 160
+      arrowParens: "avoid"
+      proseWrap: "preserve"
+  indent: off
+  "@typescript-eslint/indent":
+    - error
+    - 2
+  "@typescript-eslint/no-non-null-assertion": off
+  "@typescript-eslint/interface-name-prefix": off
+  "@typescript-eslint/no-namespace": off
+  "max-classes-per-file":
+    - error
+    - 2
+  "no-bitwise":
+    - error
+    - allow:
+        - "~"
+  "import/order": off
+  "sort-keys": off
+  "no-multiple-empty-lines": off
+  "no-console": off
